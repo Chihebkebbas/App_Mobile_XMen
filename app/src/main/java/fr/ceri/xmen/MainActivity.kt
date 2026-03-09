@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.ceri.xmen.databinding.ActivityMainBinding
 import fr.ceri.xmen.model.XMen
 import io.realm.Realm
+import org.bson.types.ObjectId
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var ui : ActivityMainBinding
 
     private lateinit var realm: Realm
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,5 +55,20 @@ class MainActivity : AppCompatActivity() {
         //scrollbar
         ui.title.movementMethod = ScrollingMovementMethod()
 
+        adapter.onItemClick = this::onItemClick
+
     }
+
+    private fun onItemClick(idXMen: ObjectId?) {
+        // TODO démarrer une transaction asynchrone, voir TP5
+        realm.executeTransactionAsync { it ->
+            // TODO récupérer le XMen dont l'identifiant est idXMen
+            val xmen = it.where(XMen::class.java).equalTo(XMen.ID, idXMen).findFirst()
+
+            // remplacer son image par R.drawable.undef
+            xmen?.idImage = R.drawable.undef
+        }
+    }
+
+
 }
