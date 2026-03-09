@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp"
     android:orientation="vertical">
-
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,26 +15,32 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <TextView
-        android:id="@+id/title"
+    <EditText
+        android:id="@+id/nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="XMen"
-        android:fontFamily="@font/spider_man"
-        android:textSize="32dp"
-        android:textAlignment="center"
-        android:scrollbars="vertical"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"/>
+        android:hint="Nom (ex: Logan)"
+        android:inputType="textPersonName" />
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <EditText
+        android:id="@+id/alias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="45dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:context=".MainActivity" />
+        android:hint="Alias (ex: Wolverine)"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/pouvoirs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Pouvoirs"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:lines="4" />
 </LinearLayout>
-

@@ -11,6 +11,8 @@ class XMenViewHolder(val ui : XmenBinding) : RecyclerView.ViewHolder(ui.root){
 
     companion object{
         val TAG = "TP2"
+        val MENU_EDIT = 1
+        val MENU_DELETE = 2
     }
 
     var xmenId: ObjectId? = null
@@ -31,6 +33,8 @@ class XMenViewHolder(val ui : XmenBinding) : RecyclerView.ViewHolder(ui.root){
 
     init {
         ui.root.setOnClickListener(this::onClick)
+
+        ui.root.setOnCreateContextMenuListener(this::onCreateContextMenu)
     }
 
     /* écouteur des clics sur le view holder */
@@ -39,5 +43,16 @@ class XMenViewHolder(val ui : XmenBinding) : RecyclerView.ViewHolder(ui.root){
             ,
             "clic sur l'élément ${xmenId}")
         onItemClick(xmenId)
+    }
+
+    private fun onCreateContextMenu(menu: android.view.ContextMenu, v: android.view.View?, menuInfo: android.view.ContextMenu.ContextMenuInfo?) {
+        // intent sans action pour fournir l'identifiant du XMen à MainActivity
+        val intent = android.content.Intent().putExtra(EditActivity.EXTRA_ID, xmenId?.toHexString())
+
+        // titre du menu = nom du XMen
+        menu.setHeaderTitle(ui.itemNom.text)
+
+        menu.add(0, MENU_EDIT, 0, "Edit").intent = intent
+        menu.add(0, MENU_DELETE, 0, "Delete").intent = intent
     }
 }

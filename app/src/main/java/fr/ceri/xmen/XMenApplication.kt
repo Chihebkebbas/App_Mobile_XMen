@@ -22,8 +22,8 @@ class XMenApplication: Application() {
     }
 
     fun initXMens(realm: Realm) {
-        realm.executeTransactionAsync {
-            if (it.where(XMen::class.java).count() == 0.toLong()) {
+        realm.executeTransactionAsync {it ->
+                it.deleteAll()
                 // accès aux ressources
                 val res = getResources()
                 val noms = res.getStringArray(R.array.noms)
@@ -46,7 +46,6 @@ class XMenApplication: Application() {
                 }
                 // libérer les images (obligation Android)
                 images.recycle()
-            }
 
         }
     }
